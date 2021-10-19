@@ -30,7 +30,7 @@ provider "google" {
 
 # Init VPC network for Message Delivery instances.
 module "message_delivery_network" {
-  source = "./network"
+  source = "./modules/network"
 
   project  = var.project
   regions  = tolist([
@@ -40,7 +40,7 @@ module "message_delivery_network" {
 }
 
 module "instance_template" {
-  source = "./instance-template"
+  source = "./modules/instance-template"
 
   project      = var.project
   region       = var.region
