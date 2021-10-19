@@ -28,15 +28,15 @@ provider "google" {
   project = var.project
 }
 
-# Init VPC network for Message Delivery instances.
-module "message_delivery_network" {
+# Init VPC network for Liquor instances.
+module "liquor_network" {
   source = "./modules/network"
 
   project  = var.project
   regions  = tolist([
     var.region
   ])
-  vpc_name = "message-delivery"
+  vpc_name = "liquor"
 }
 
 module "instance_template" {
@@ -44,20 +44,20 @@ module "instance_template" {
 
   project      = var.project
   region       = var.region
-  network      = module.message_delivery_network.network
-  subnetwork   = module.message_delivery_network.subnets[var.region]
+  network      = module.liquor_network.network
+  subnetwork   = module.liquor_network.subnets[var.region]
   container    = var.container
   machine_type = var.vm_machine_type
 }
 
-resource "google_compute_instance_from_template" "message-delivery-server" {
-  name = "message-delivery-server"
+resource "google_compute_instance_from_template" "liquor-server" {
+  name = "liquor-server"
   zone = var.zone
 
   source_instance_template = module.instance_template.template.self_link
 
   network_interface {
-    subnetwork = module.message_delivery_network.subnets[var.region]
+    subnetwork = module.liquor_network.subnets[var.region]
     access_config {
       nat_ip = var.vm_address
     }

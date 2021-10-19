@@ -24,7 +24,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-output "message-delivery" {
-  description = "The name of the created Message Delivery VM."
-  value       = google_compute_instance_from_template.message-delivery-server.name
+output "liquor" {
+  description = "The name of the created Liquor VM."
+  value       = google_compute_instance_from_template.liquor-server.name
 }

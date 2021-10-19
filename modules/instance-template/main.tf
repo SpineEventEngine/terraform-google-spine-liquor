@@ -45,7 +45,7 @@ data "google_compute_default_service_account" "default" {
   # The default service account of GCE instances
 }
 
-# Generates Instance Template for Message Delivery Server VMs.
+# Generates Instance Template for Liquor Server VMs.
 #
 # For details about all inputs, see the module docs:
 # https://registry.terraform.io/modules/terraform-google-modules/vm/google/latest/submodules/instance_template
@@ -55,7 +55,7 @@ module "vm_instance_template" {
 
   project_id          = var.project
   region              = var.region
-  name_prefix         = "message-delivery-${var.region}"
+  name_prefix         = "liquor-${var.region}"
   preemptible         = false
   on_host_maintenance = "MIGRATE"
   service_account     = {

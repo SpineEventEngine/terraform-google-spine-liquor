@@ -30,7 +30,7 @@ variable "project" {
 }
 
 variable "region" {
-  description = "The GCP region of an Message Delivery instance group zone."
+  description = "The GCP region of an Liquor instance group zone."
   type        = string
 }
 
@@ -40,7 +40,7 @@ variable "zone" {
 }
 
 variable "container" {
-  description = "The GCE container image FQN to be used by the Message Delivery instances."
+  description = "The GCE container image FQN to be used by the Liquor instances."
   type        = string
 }
 
@@ -50,7 +50,7 @@ variable "vm_address" {
 }
 
 variable "vm_machine_type" {
-  description = "The GCE VM machine type to be used for the Message Delivery instances."
+  description = "The GCE VM machine type to be used for the Liquor instances."
   type        = string
   default     = "e2-highcpu-2"
 }
