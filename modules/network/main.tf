@@ -62,7 +62,7 @@ locals {
 # of this module for details.
 module "vpc" {
   source  = "terraform-google-modules/network/google"
-  version = "~> 3.3"
+  version = "~> 3.4"
 
   project_id   = var.project
   network_name = var.vpc_name
@@ -77,6 +77,7 @@ module "vpc" {
 # of this module for details.
 module "firewall_rules" {
   source       = "terraform-google-modules/network/google//modules/firewall-rules"
+  version      = "~> 3.4"
   project_id   = var.project
   network_name = module.vpc.network_name
 
