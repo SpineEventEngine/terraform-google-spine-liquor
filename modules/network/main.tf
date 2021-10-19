@@ -73,7 +73,7 @@ module "vpc" {
 
 # Generates a set of firewall rules for the custom VPC.
 #
-# See <a href="https://github.com/terraform-google-modules/terraform-google-network/tree/v3.2.2/modules/firewall-rules">docs</a>
+# See <a href="https://github.com/terraform-google-modules/terraform-google-network/tree/v3.4.0/modules/firewall-rules">docs</a>
 # of this module for details.
 module "firewall_rules" {
   source       = "terraform-google-modules/network/google//modules/firewall-rules"
