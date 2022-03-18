@@ -49,6 +49,12 @@ variable "container" {
   type        = string
 }
 
+variable "env" {
+  description = "Environment variables to set to a VM that runs container."
+  type        = list(object({ name = string, value = string }))
+  default     = []
+}
+
 variable "additional_metadata" {
   type        = map(any)
   description = "Additional metadata to attach to the instance."

@@ -48,6 +48,7 @@ module "instance_template" {
   subnetwork   = module.liquor_network.subnets[var.region]
   container    = var.container
   machine_type = var.vm_machine_type
+  env          = var.env
 }
 
 resource "google_compute_instance_from_template" "liquor-server" {
