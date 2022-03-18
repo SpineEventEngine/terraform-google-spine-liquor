@@ -54,3 +54,9 @@ variable "vm_machine_type" {
   type        = string
   default     = "e2-highcpu-2"
 }
+
+variable "env" {
+  description = "Environment variables to set for the Liquor server."
+  type        = map(string)
+  default     = {}
+}
