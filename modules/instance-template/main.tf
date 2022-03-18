@@ -36,6 +36,7 @@ module "gce-container" {
   version = "~> 2.0"
 
   container      = {
+    env   = var.env
     image = var.container
   }
   restart_policy = "Always"
