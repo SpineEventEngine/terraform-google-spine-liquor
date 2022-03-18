@@ -57,6 +57,6 @@ variable "vm_machine_type" {
 
 variable "env" {
   description = "Environment variables to set for the Liquor server."
-  type        = map(string)
-  default     = {}
+  type        = list(object({ name = string, value = string }))
+  default     = []
 }
