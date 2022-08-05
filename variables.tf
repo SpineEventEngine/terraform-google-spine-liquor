@@ -60,3 +60,9 @@ variable "env" {
   type        = list(object({ name = string, value = string }))
   default     = []
 }
+
+variable "metadata" {
+  type        = map(any)
+  description = "Metadata to attach to the instance."
+  default     = {}
+}
