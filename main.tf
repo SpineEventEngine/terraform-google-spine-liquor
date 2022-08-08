@@ -32,8 +32,8 @@ provider "google" {
 module "liquor_network" {
   source = "./modules/network"
 
-  project  = var.project
-  regions  = tolist([
+  project = var.project
+  regions = tolist([
     var.region
   ])
   vpc_name = "liquor"
@@ -42,13 +42,13 @@ module "liquor_network" {
 module "instance_template" {
   source = "./modules/instance-template"
 
-  project      = var.project
-  region       = var.region
-  network      = module.liquor_network.network
-  subnetwork   = module.liquor_network.subnets[var.region]
-  container    = var.container
-  machine_type = var.vm_machine_type
-  env          = var.env
+  project             = var.project
+  region              = var.region
+  network             = module.liquor_network.network
+  subnetwork          = module.liquor_network.subnets[var.region]
+  container           = var.container
+  machine_type        = var.vm_machine_type
+  env                 = var.env
   additional_metadata = var.metadata
 }
 
