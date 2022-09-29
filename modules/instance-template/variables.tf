@@ -62,7 +62,7 @@ variable "additional_metadata" {
 }
 
 variable image_project {
-  description = "The project of the GCE image."
+  description = "The project of the GCE container-optimized image."
   type        = string
   default     = "cos-cloud"
 }
@@ -71,6 +71,12 @@ variable "image_family" {
   description = "The GCE image family to initialize instance template from. The last not-deprecated image is taken."
   type        = string
   default     = "cos-stable"
+}
+
+variable image_name {
+  description = "The GCE container-optimized image to run on the instance."
+  type        = string
+  default     = ""
 }
 
 variable "machine_type" {

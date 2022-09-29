@@ -35,6 +35,10 @@ module "gce-container" {
   source  = "terraform-google-modules/container-vm/google"
   version = "~> 2.0"
 
+  cos_image_family = var.image_family
+  cos_image_name = var.image_name
+  cos_project = local.container_image_project
+
   container      = {
     env   = var.env
     image = var.container
