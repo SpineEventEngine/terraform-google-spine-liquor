@@ -50,6 +50,9 @@ module "instance_template" {
   machine_type        = var.vm_machine_type
   env                 = var.env
   additional_metadata = var.metadata
+  image_project       = var.host_os_image_project
+  image_family        = var.host_os_image_family
+  image_name          = var.host_os_image_name
 }
 
 resource "google_compute_instance_from_template" "liquor-server" {

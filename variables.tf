@@ -66,3 +66,21 @@ variable "metadata" {
   description = "Metadata to attach to the instance."
   default     = {}
 }
+
+variable "host_os_image_project" {
+  description = "The project of the image to run on the instance."
+  type        = string
+  default     = "cos-cloud"
+}
+
+variable "host_os_image_family" {
+  description = "The image family of the container-optimized images to run on the instance. The last not-deprecated image is taken. "
+  type        = string
+  default     = "cos-stable"
+}
+
+variable "host_os_image_name" {
+  description = "The name of the container-optimized image to run on the instance."
+  type        = string
+  default     = ""
+}
