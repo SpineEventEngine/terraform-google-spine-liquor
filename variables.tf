@@ -74,7 +74,7 @@ variable "host_os_image_project" {
 }
 
 variable "host_os_image_family" {
-  description = "The image family of the container-optimized images to run on the instance. The last not-deprecated image is taken. "
+  description = "The image family of the container-optimized images to run on the instance. The last not-deprecated image is taken."
   type        = string
   default     = "cos-stable"
 }
