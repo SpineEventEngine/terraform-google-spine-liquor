@@ -35,10 +35,6 @@ module "gce-container" {
   source  = "terraform-google-modules/container-vm/google"
   version = "~> 2.0"
 
-  cos_image_family = var.image_family
-  cos_image_name = var.image_name
-  cos_project = local.container_image_project
-
   container      = {
     env   = var.env
     image = var.container
@@ -77,7 +73,7 @@ module "vm_instance_template" {
   disk_size_gb         = 20
   source_image_project = local.container_image_project
   source_image_family  = var.image_family
-  source_image         = reverse(split("/", module.gce-container.source_image))[0]
+  source_image         = var.image_name
   metadata             = merge(var.additional_metadata, tomap({
     "gce-container-declaration" = module.gce-container.metadata_value,
     "google-logging-enabled"    = "true"
