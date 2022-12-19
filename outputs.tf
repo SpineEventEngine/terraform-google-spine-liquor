@@ -30,6 +30,6 @@ output "liquor" {
 }
 
 output "network" {
-  description = "A network created for the Liquor instances"
+  description = "A network created for the Liquor instances."
   value       = module.liquor_network
 }
