@@ -28,3 +28,8 @@ output "liquor" {
   description = "The name of the created Liquor VM."
   value       = google_compute_instance_from_template.liquor-server.name
 }
+
+output "network" {
+  description = "A network created for the Liquor instances."
+  value       = module.liquor_network
+}
