@@ -38,6 +38,16 @@ module "liquor_network" {
   ])
   vpc_name = "liquor"
 }
+locals {
+  adminSettings = [
+    { name = "ADMIN_SERVICE", value = var.admin.enabled },
+    { name = "ADMIN_USERNAME", value = var.admin.login },
+    { name = "ADMIN_PASSWORD", value = var.admin.password },
+    { name = "MICRONAUT_SERVER_PORT", value = var.admin.port },
+  ]
+
+  adminEnv = [for item in local.adminSettings : item if item.value != null]
+}
 
 module "instance_template" {
   source = "./modules/instance-template"
@@ -48,7 +58,7 @@ module "instance_template" {
   subnetwork          = module.liquor_network.subnets[var.region]
   container           = var.container
   machine_type        = var.vm_machine_type
-  env                 = var.env
+  env                 = concat(var.env, local.adminEnv)
   additional_metadata = var.metadata
 }
 
