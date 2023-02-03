@@ -66,3 +66,21 @@ variable "metadata" {
   description = "Metadata to attach to the instance."
   default     = {}
 }
+
+variable "admin" {
+  description = "Configuration for the Admin Server of the Liquor image."
+  sensitive   = true
+  type        = object({
+    enabled  = bool
+    port     = optional(number)
+    login    = optional(string)
+    password = optional(string)
+  })
+  validation {
+    condition     = (var.admin.login != null && var.admin.password != null) || (var.admin.login == null && var.admin.password == null)
+    error_message = "Impossible to set only `login` or `password`, both should be set."
+  }
+  default = {
+    enabled = false
+  }
+}
