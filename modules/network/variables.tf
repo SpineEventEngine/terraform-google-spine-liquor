@@ -26,27 +26,33 @@
 
 variable "project" {
   description = "The Google Cloud Project ID."
-  type = string
+  type        = string
 }
 
 variable "regions" {
   description = "The set of GCP regions in which to configure subnetworks for GCE VMs."
-  type = set(string)
+  type        = set(string)
 }
 
 variable "vpc_name" {
   description = "The name of VPC to create."
-  type = string
+  type        = string
 }
 
 variable "cidrsubnet_ip_range" {
   description = "IP network address prefix for subnets within VPC. Must be given in CIDR notation."
-  type = string
-  default = "10.128.0.0/16"
+  type        = string
+  default     = "10.128.0.0/16"
 }
 
 variable "cidrsubnet_new_bits" {
   description = "The number of additional bits with which every subnet IP range will extend the prefix."
-  type = number
-  default = 4
+  type        = number
+  default     = 4
+}
+
+variable "allow_ingres_tcp_ports" {
+  description = "Ports that will be added to the firewall exceptions to allow connection over TCP protocol."
+  type        = list(number)
+  default     = []
 }
