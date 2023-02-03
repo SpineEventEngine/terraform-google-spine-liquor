@@ -38,6 +38,7 @@ module "liquor_network" {
   ])
   vpc_name = "liquor"
 }
+
 locals {
   adminSettings = [
     { name = "ADMIN_SERVICE", value = var.admin.enabled },
