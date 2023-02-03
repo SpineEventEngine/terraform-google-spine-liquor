@@ -36,7 +36,8 @@ module "liquor_network" {
   regions = tolist([
     var.region
   ])
-  vpc_name = "liquor"
+  vpc_name               = "liquor"
+  allow_ingres_tcp_ports = var.admin.port != null ? [var.admin.port] : []
 }
 
 locals {
