@@ -81,7 +81,7 @@ module "firewall_rules" {
   project_id   = var.project
   network_name = module.vpc.network_name
 
-  rules = [
+  rules = concat( [
     {
       name                    = "${module.vpc.network_name}-allow-ssh-ingress"
       description             = "Allow SSH from anywhere."
@@ -119,7 +119,9 @@ module "firewall_rules" {
       ]
       deny       = []
       log_config = null
-    },
+    }
+  ], length(var.allow_ingres_tcp_ports) > 0 ?
+  [
     {
       name                    = "${module.vpc.network_name}-allow-custom"
       description             = "Allow custom"
@@ -139,5 +141,5 @@ module "firewall_rules" {
       deny       = []
       log_config = null
     }
-  ]
+  ] : [])
 }
