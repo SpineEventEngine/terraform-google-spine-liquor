@@ -37,7 +37,7 @@ module "liquor_network" {
     var.region
   ])
   vpc_name               = "liquor"
-  allow_ingres_tcp_ports = var.admin.port != null ? [var.admin.port] : []
+  allow_ingres_tcp_ports = var.admin.port != null ? [var.admin.port] : [8080]
 }
 
 locals {
