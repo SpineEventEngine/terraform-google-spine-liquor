@@ -114,7 +114,7 @@ module "firewall_rules" {
       allow                   = [
         {
           protocol = "tcp"
-          ports    = ["8484", "8080", "8000"]
+          ports    = ["8484"]
         }
       ]
       deny       = []
