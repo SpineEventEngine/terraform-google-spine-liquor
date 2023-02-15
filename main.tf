@@ -42,7 +42,7 @@ module "liquor_network" {
 
 locals {
   adminSettings = [
-    { name = "ADMIN_SERVICE", value = var.admin.enabled },
+    { name = "ADMIN_SERVER", value = var.admin.enabled },
     { name = "ADMIN_USERNAME", value = var.admin.login },
     { name = "ADMIN_PASSWORD", value = var.admin.password },
     { name = "MICRONAUT_SERVER_PORT", value = var.admin.port },
