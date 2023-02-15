@@ -81,7 +81,7 @@ module "firewall_rules" {
   project_id   = var.project
   network_name = module.vpc.network_name
 
-  rules = [
+  rules = concat( [
     {
       name                    = "${module.vpc.network_name}-allow-ssh-ingress"
       description             = "Allow SSH from anywhere."
@@ -98,8 +98,8 @@ module "firewall_rules" {
           ports    = ["22"]
         }
       ]
-      deny                    = []
-      log_config              = null
+      deny       = []
+      log_config = null
     },
     {
       name                    = "${module.vpc.network_name}-allow-grpc"
@@ -114,11 +114,32 @@ module "firewall_rules" {
       allow                   = [
         {
           protocol = "tcp"
-          ports    = ["8484", "8080", "8000"]
+          ports    = ["8484"]
         }
       ]
-      deny                    = []
-      log_config              = null
+      deny       = []
+      log_config = null
     }
-  ]
+  ], length(var.allow_ingres_tcp_ports) > 0 ?
+  [
+    {
+      name                    = "${module.vpc.network_name}-allow-custom"
+      description             = "Allow custom"
+      direction               = "INGRESS"
+      priority                = null
+      ranges                  = null
+      source_tags             = null
+      source_service_accounts = null
+      target_tags             = null
+      target_service_accounts = null
+      allow                   = [
+        {
+          protocol = "tcp"
+          ports    = var.allow_ingres_tcp_ports
+        }
+      ]
+      deny       = []
+      log_config = null
+    }
+  ] : [])
 }

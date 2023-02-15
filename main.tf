@@ -36,7 +36,19 @@ module "liquor_network" {
   regions = tolist([
     var.region
   ])
-  vpc_name = "liquor"
+  vpc_name               = "liquor"
+  allow_ingres_tcp_ports = var.admin.port != null ? [var.admin.port] : [8080]
+}
+
+locals {
+  adminSettings = [
+    { name = "ADMIN_SERVER", value = var.admin.enabled },
+    { name = "ADMIN_USERNAME", value = var.admin.login },
+    { name = "ADMIN_PASSWORD", value = var.admin.password },
+    { name = "MICRONAUT_SERVER_PORT", value = var.admin.port },
+  ]
+
+  adminEnv = [for item in local.adminSettings : item if item.value != null]
 }
 
 module "instance_template" {
@@ -48,7 +60,7 @@ module "instance_template" {
   subnetwork          = module.liquor_network.subnets[var.region]
   container           = var.container
   machine_type        = var.vm_machine_type
-  env                 = var.env
+  env                 = concat(var.env, local.adminEnv)
   additional_metadata = var.metadata
 }
 

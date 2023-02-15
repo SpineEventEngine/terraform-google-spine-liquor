@@ -66,3 +66,25 @@ variable "metadata" {
   description = "Metadata to attach to the instance."
   default     = {}
 }
+
+variable "admin" {
+  description = <<EOT
+    Configuration for the Admin Server of the Liquor image.
+    The guide on how to provide sensitive data to the template and avoid passing it to the VCS:
+    https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables#set-values-with-a-tfvars-file
+  EOT
+  sensitive   = true
+  type        = object({
+    enabled  = bool
+    port     = optional(number)
+    login    = optional(string)
+    password = optional(string)
+  })
+  validation {
+    condition     = (var.admin.login != null && var.admin.password != null) || (var.admin.login == null && var.admin.password == null)
+    error_message = "Impossible to set only `login` or `password`, both should be set."
+  }
+  default = {
+    enabled = false
+  }
+}
