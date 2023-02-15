@@ -68,7 +68,11 @@ variable "metadata" {
 }
 
 variable "admin" {
-  description = "Configuration for the Admin Server of the Liquor image."
+  description = <<EOT
+    Configuration for the Admin Server of the Liquor image.
+    The guide on how to provide sensitive data to the template and avoid passing it to the VCS:
+    https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables#set-values-with-a-tfvars-file
+  EOT
   sensitive   = true
   type        = object({
     enabled  = bool
