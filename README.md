@@ -89,9 +89,9 @@ module "spine-liquor" {
   ]
   admin = {   # Configuration of the Admin server [8].
     enabled = true
-    port = 8181   # A port on which the Admin server web interface will be available.
-    login = ""   # Login to the Liquor Admin web interface [9].
-    password = ""   # Password to the Liquor Admin web interface [9].
+    port = 8181   # Port on which the Admin server web interface will be available. Optional parameter. Default is `8181`.
+    login = ""   # Login to the Liquor Admin web interface [9]. Optional parameter.
+    password = ""   # Password to the Liquor Admin web interface [9]. Optional parameter.
   }
 }
 ```
@@ -128,8 +128,10 @@ on the server. By default, this option is disabled. **This feature is available 
 containers starting from the version `0.8.8`.** Using this setting with containers of lower versions will 
 take no effect.
 
-**[9]** The instruction of how to set sensitive values to the Terraform configuration is available 
-in the [docs][tfvars].
+**[9]** By default, the `login` and `password` parameters are determined by the deployed container, so please refer 
+to the corresponding container documentation to check what is this values for your container. Even though these 
+parameters are optional and have default values we recommend to set your own `login` and `password`. The instruction 
+of how to set sensitive values to the Terraform configuration is available in the [docs][tfvars].
 
 [e2-machine]: https://cloud.google.com/compute/docs/general-purpose-machines#e2_machine_types_table
 [gce-machine-resource]: https://cloud.google.com/compute/docs/machine-resource
