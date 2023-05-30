@@ -16,7 +16,7 @@ Deployment configuration
 
 The Liquor module has the following inputs available for configuring the deployment and the server itself:
 
-The complete configuration example may look like this:
+Below you will find a complete configuration example.
 
 Some values that are used several times in the main configuration are declared as Terraform variables in a separate
 `variables.tf` file.
