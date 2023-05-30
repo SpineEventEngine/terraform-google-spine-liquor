@@ -25,7 +25,7 @@
 #
 
 variable "project" {
-  description = "The ID of Google Cloud Project."
+  description = "The ID of Google Cloud Project where the Liquor will be deployed."
   type        = string
 }
 
