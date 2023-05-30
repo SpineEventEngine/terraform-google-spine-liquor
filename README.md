@@ -90,8 +90,8 @@ module "spine-liquor" {
   admin = {   # Configuration of the Admin server [8].
     enabled = true
     port = 8181   # Port on which the Admin server web interface will be available. Optional parameter. Default is `8181`.
-    login = ""   # Login to the Liquor Admin web interface [9]. Optional parameter.
-    password = ""   # Password to the Liquor Admin web interface [9]. Optional parameter.
+    login = "admin"   # Login to the Liquor Admin web interface [9]. Optional parameter.
+    password = "admin"   # Password to the Liquor Admin web interface [9]. Optional parameter.
   }
 }
 ```
