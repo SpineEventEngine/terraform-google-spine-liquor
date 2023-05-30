@@ -1,5 +1,5 @@
 #
-# Copyright 2021, TeamDev. All rights reserved.
+# Copyright 2023, TeamDev. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 #
 
 variable "project" {
-  description = "The ID of Google Cloud Project."
+  description = "The ID of Google Cloud Project where the Liquor will be deployed."
   type        = string
 }
 
@@ -56,7 +56,13 @@ variable "vm_machine_type" {
 }
 
 variable "env" {
-  description = "Environment variables to set for the Liquor server."
+  description = <<EOT
+    Environment variables to set for the Liquor server.
+
+    Please pay attention that the effect will depend on the particular image used.
+    As an example the `MAX_INBOUND_MESSAGE_SIZE` and `SHARD_PROCESSING_TIMEOUT` are only accepted by
+    the `simple-server` implementation and will not affect the behaviour of the `server`.
+  EOT
   type        = list(object({ name = string, value = string }))
   default     = []
 }
