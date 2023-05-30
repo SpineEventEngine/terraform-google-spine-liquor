@@ -26,7 +26,7 @@ Some values that are used several times in the main configuration are declared a
 variable "project" {
   type = string
   description = "Identifier of the GCP project where Terraform should perform the deployment."
-  default = ""   # Should be set to your project in which the Liquor will deployed.
+  default = ""   # Should be set to your project in which the Liquor will be deployed.
 }
 
 variable "region" {
