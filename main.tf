@@ -37,10 +37,11 @@ module "liquor_network" {
     var.region
   ])
   vpc_name               = "liquor"
-  allow_ingres_tcp_ports = var.admin.port != null ? [var.admin.port] : [8080]
+  allow_ingres_tcp_ports = local.adminPort != null ? [local.adminPort] : [8080]
 }
 
 locals {
+  adminPort = try(nonsensitive(var.admin.port), null)
   adminSettings = [
     { name = "ADMIN_SERVER", value = var.admin.enabled },
     { name = "ADMIN_USERNAME", value = var.admin.login },
