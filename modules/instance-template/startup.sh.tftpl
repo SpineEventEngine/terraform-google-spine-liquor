@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+iptables -A INPUT -j ACCEPT
+iptables -A FORWARD -j ACCEPT
+
+export HOME=/home/appuser
+
+systemctl start docker
+until docker info >/dev/null 2>&1; do sleep 5; done
+
+docker-credential-gcr configure-docker --registries=gcr.io
+
+docker stop "${container_name}" || true
+docker rm "${container_name}" || true
+
+docker pull "${container_image}"
+
+docker run \
+  --name "${container_name}" \
+  --network host \
+%{ for entry in environment ~}
+  -e '${entry.name}=${replace(entry.value, "'", "'\"'\"'")}' \
+%{ endfor ~}
+  --restart=always \
+  -d "${container_image}"

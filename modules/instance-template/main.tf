@@ -28,20 +28,6 @@ locals {
   container_image_project = var.image_project != "" ? var.image_project : var.project
 }
 
-# Prepares a GCE container image.
-#
-# See https://github.com/terraform-google-modules/terraform-google-container-vm for additional info.
-module "gce-container" {
-  source  = "terraform-google-modules/container-vm/google"
-  version = "~> 2.0"
-
-  container      = {
-    env   = var.env
-    image = var.container
-  }
-  restart_policy = "Always"
-}
-
 data "google_compute_default_service_account" "default" {
   # The default service account of GCE instances
 }
@@ -73,11 +59,14 @@ module "vm_instance_template" {
   disk_size_gb         = 20
   source_image_project = local.container_image_project
   source_image_family  = var.image_family
-  source_image         = reverse(split("/", module.gce-container.source_image))[0]
   metadata             = merge(var.additional_metadata, tomap({
-    "gce-container-declaration" = module.gce-container.metadata_value,
-    "google-logging-enabled"    = "true"
+    "google-logging-enabled" = "true"
   }))
+  startup_script       = templatefile("${path.module}/startup.sh.tftpl", {
+    container_name  = "liquor-server"
+    container_image = var.container
+    environment     = var.env
+  })
 
   # See https://cloud.google.com/security/shielded-cloud/shielded-vm for details.
   enable_shielded_vm       = true
