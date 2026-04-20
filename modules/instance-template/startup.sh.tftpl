@@ -4,7 +4,18 @@ set -e
 export HOME=/home/appuser
 
 systemctl start docker
-until docker info >/dev/null 2>&1; do sleep 5; done
+docker_wait_timeout_secs=120
+docker_wait_sleep_secs=5
+docker_wait_elapsed_secs=0
+until docker info >/dev/null 2>&1; do
+  if [ "$docker_wait_elapsed_secs" -ge "$docker_wait_timeout_secs" ]; then
+    echo "Docker did not become ready within ${docker_wait_timeout_secs} seconds." >&2
+    systemctl status docker --no-pager || true
+    exit 1
+  fi
+  sleep "$docker_wait_sleep_secs"
+  docker_wait_elapsed_secs=$((docker_wait_elapsed_secs + docker_wait_sleep_secs))
+done
 
 docker-credential-gcr configure-docker --registries=gcr.io
 
