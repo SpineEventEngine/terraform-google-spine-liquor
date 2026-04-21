@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+iptables -A INPUT -j ACCEPT
+iptables -A FORWARD -j ACCEPT
+
 export HOME=/home/appuser
 
 systemctl start docker
