@@ -9,7 +9,7 @@ docker_wait_sleep_secs=5
 docker_wait_elapsed_secs=0
 until docker info >/dev/null 2>&1; do
   if [ "$docker_wait_elapsed_secs" -ge "$docker_wait_timeout_secs" ]; then
-    echo "Docker did not become ready within ${docker_wait_timeout_secs} seconds." >&2
+    echo "Docker did not become ready within $${docker_wait_timeout_secs} seconds." >&2
     systemctl status docker --no-pager || true
     exit 1
   fi
