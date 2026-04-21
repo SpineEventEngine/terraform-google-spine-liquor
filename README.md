@@ -68,7 +68,7 @@ resource "google_compute_address" "liquor-ip" {   # IP the main application will
 
 module "spine-liquor" {
   source     = "SpineEventEngine/spine-liquor/google"
-  version    = "0.9.0"   # Version of the `spine-liquor` Terraform module.
+  version    = "0.10.0"   # Version of the `spine-liquor` Terraform module.
   project    = var.project   # Refers to the “project” variable in the `variables.tf` file.
   region     = var.region   # Refers to the “region” variable in the `variables.tf` file.
   zone       = var.zone   # Refers to the “zone” variable in the `variables.tf` file.
